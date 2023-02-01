@@ -15,7 +15,7 @@ for k = 1:N
     end
 end
 
-subplot(3,1,1);
+subplot(2,3,1);
 title("Sampled unit step")
 stem(t,x)
 
@@ -38,10 +38,20 @@ for m = 0:(2*N-1)
         disp(abs(X))
     end
 end
+k = -(N-1):(N);
+% IDFT of X
+x_idft = zeros(1, N);
+for n = 0 : (N-1)
+    for c = 1:2*length(x) 
+     
+        x_idft(n+1) = x_idft(n+1) + X(c) * exp(1i * 2 * pi * n * k(c) / N) ;
+    end
+    x_idft(n+1) = x_idft(n+1) /(2*N)
+end
 magx = abs(X);
 hold on;
 
-subplot(3,1,2);
+subplot(2,3,2);
 plot (2*pi*k/N,magx, "Color",'m');
 % plot(t,x, LineWidth=1);
 title("DFT of Unit step fuction")
@@ -50,8 +60,22 @@ ylabel("X_k")
 
 y = fft(x);
 
-subplot(3,1,3);
+subplot(2,3,3);
 a = 0:N-1;
 
 plot (2*pi*a/N,abs(fftshift(y)));
 title("In built FFT function")
+
+
+
+
+subplot(2,3,4);
+plot( t, abs(x_idft))
+title("IDFT function")
+
+
+z = ifft(y);
+subplot(2,3,5);
+stem(t, z);
+title("inbuilt IDFT function");
+
