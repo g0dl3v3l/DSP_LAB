@@ -15,9 +15,14 @@ for k = 1:N
     end
 end
 
+
+
 subplot(2,3,1);
-title("Sampled unit step")
+
 stem(t,x)
+% plot(t,x, LineWidth=1);
+title("Sampled unit step")
+
 
 N = length(x); %number of samples
 X = 0;
@@ -70,7 +75,7 @@ title("In built FFT function")
 
 
 subplot(2,3,4);
-plot( t, abs(x_idft))
+stem( t, abs(x_idft))
 title("IDFT function")
 
 
