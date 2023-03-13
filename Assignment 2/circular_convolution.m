@@ -41,7 +41,7 @@ ylabel("c[n]")
 
 subplot(2,1,2);
 stem(s3);
-title("idft((S1)(S2))")
+title("idft")
 xlabel("n")
 ylabel("s3[n]")
 
