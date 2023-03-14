@@ -14,18 +14,16 @@ s1_padded = [s1 zeros(1, N-N1)];
 s2_padded = [s2 zeros(1, N-N2)];
 
 % initialize the output sequence
-c = zeros(1,N);
+c = zeros(N,N);
 
 % perform circular convolution using nested loops
-for n = 1:N
-    for k = 1:N
-        % calculate the index for circular shift
-        idx = mod(n-k,N)+1;
-        % perform the convolution
-        c(n) = c(n) + s1_padded(k)*s2_padded(idx);
+for i=1:N
+    for j=1:N
+        c(i,j) = s2_padded(mod(i-j,N)+1);
     end
 end
-
+% y = c * s1_padded;
+y = s1_padded * transpose(c);
 
 S1 = my_dft(s1_padded);
 S2 = my_dft(s2_padded);
@@ -34,7 +32,7 @@ s3 = my_idft(S3);
 % print the output sequence
 
 subplot(2,1,1);
-stem(c);
+stem(y);
 title("s1 (*) s2")
 xlabel("n")
 ylabel("c[n]")
