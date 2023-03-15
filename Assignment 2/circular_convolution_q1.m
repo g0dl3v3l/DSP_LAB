@@ -31,16 +31,16 @@ S3 = S1 .* S2;
 s3 = my_idft(S3);
 % print the output sequence
 
-subplot(2,1,1);
+
 stem(y);
-title("Question 1 circular convolution")
+title("Question 1 circular convolution without using inbuilt function")
 xlabel("n")
 ylabel("c[n]")
 
-subplot(2,1,2);
-stem(s3);
-title("Question 2 circular c Real part")
-xlabel("n")
-ylabel("s3[n]")
-
-disp(real(s3))
+% subplot(2,1,2);
+% stem(s3);
+% title("Question 1 circular convolution Real part of ")
+% xlabel("n")
+% ylabel("s3[n]")
+% 
+% disp(real(s3))

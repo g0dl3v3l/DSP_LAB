@@ -23,8 +23,8 @@ for i = 1:L
 end
 time_linear_summation = toc;
 disp(['Time taken by linear convolution:  summation', num2str(time_linear_summation), ' seconds']);
-disp(['number of multiplications in matrix method is  ' , num2str(mult_count_summation )]);
-disp(['Number of additions in the matrix method ' , num2str(add_count_summation)]);
+disp(['number of multiplications in summation method is  ' , num2str(mult_count_summation )]);
+disp(['Number of additions in the summation method ' , num2str(add_count_summation)]);
 %N1 = max(N,M);
 
 %matrix method
@@ -48,14 +48,35 @@ for i=1:L
         c(i,j) = s2_padded(mod(i-j,L)+1);
     end
 end
+sum = 0;
+product = 0;
 
-y = s1_padded * transpose(c);
+m = transpose(c);
+%y = s1_padded * transpose(c);
+%y = s1_padded * c;
+y = zeros(1,L);
+for i=1:L
+     for j=1:L
+         mult_count_matirx1  = mult_count_matirx1  + 1;
+         add_count_matrix = add_count_matrix + 1;
+         product = s1_padded(j) * m(j,i);
+         sum = sum + product;
+     end
+
+     y(i) = sum;
+     sum  = 0;
+     product = 0;
+end
+         
+
+
+
+
 
 time_linear_matrix = toc;
 
 disp(['Time taken by linear convolution matrix: ', num2str(time_linear_matrix), ' seconds']);
-mult_count_matrix = mult_count_matirx + L;
-add_count_matrix = add_count_matrix + (L-1)*L;  % account for (L-1)*L in matrix-vector multiplication
+
 disp(['number of multiplications in matrix method is  ' , num2str(mult_count_matirx1 )]);
 disp(['Number of additions in the matrix method ' , num2str(add_count_matrix)]);
 
@@ -72,6 +93,7 @@ xlabel("n")
 ylabel("y_l[n]")
 
 
+disp(y)
 
 
 

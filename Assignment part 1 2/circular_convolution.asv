@@ -33,14 +33,14 @@ s3 = my_idft(S3);
 
 subplot(2,1,1);
 stem(y);
-title("s1 (*) s2")
+title("Question 1 circular convolution")
 xlabel("n")
 ylabel("c[n]")
 
 subplot(2,1,2);
 stem(s3);
-title("idft((S1)(S2))")
+title("Question 2 circular c Real part")
 xlabel("n")
 ylabel("s3[n]")
 
-
+disp(real(s3))

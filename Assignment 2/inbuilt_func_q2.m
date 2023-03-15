@@ -7,7 +7,7 @@ M = length(s1);
 N = length(s2);
 
 % compute the length of the linear convolution
-L = M + N - 1;
+L = max(N,M);
 
 % compute the FFT of the input signals
 S1 = fft(s1, L);
@@ -21,10 +21,10 @@ y = ifft(Y);
 
 
 stem(Y);
-title("circular convoluiton")
+title("circular convoluiton question without using FFT and IFFT function")
 xlabel("n")
 ylabel("s3[n]")
 
 
-
+disp(real(Y))
 

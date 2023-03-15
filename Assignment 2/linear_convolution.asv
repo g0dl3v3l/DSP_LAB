@@ -23,9 +23,8 @@ for i = 1:L
 end
 time_linear_summation = toc;
 disp(['Time taken by linear convolution:  summation', num2str(time_linear_summation), ' seconds']);
-
-fprintf('Number of multiplications: %d\n', mult_count_summation);
-fprintf('Number of additions: %d\n', add_count_summation);
+disp(['number of multiplications in summation method is  ' , num2str(mult_count_summation )]);
+disp(['Number of additions in the summation method ' , num2str(add_count_summation)]);
 %N1 = max(N,M);
 
 %matrix method
@@ -36,31 +35,40 @@ s2_padded = [s2 zeros(1, L-N)];
 % initialize the output sequence
 
 c = zeros(L,L);
-mult_count_matirx = 0;  
+mult_count_matirx1 = 0;  
 add_count_matrix = 0;   
-t = 0;
+
 % perform circular convolution
 tic
 for i=1:L
     for j=1:L
-        t = t+ 1;
-        mult_count_matrix = mult_count_matrix + 1;
+       
+        mult_count_matirx1  = mult_count_matirx1  + 1;
         add_count_matrix = add_count_matrix + 1;
         c(i,j) = s2_padded(mod(i-j,L)+1);
     end
 end
-
+m = transpose(c);
 y = s1_padded * transpose(c);
+%y = s1_padded * c;
+
+for i=1:length(c)
+     for j=1:length(s1_padded)
+         product = s1_padded(i,j) * m(j,i);
+         sum 
+
+
+
+
 
 time_linear_matrix = toc;
 
 disp(['Time taken by linear convolution matrix: ', num2str(time_linear_matrix), ' seconds']);
-mult_count_matrix = mult_count_matirx + L;
+mult_count_matrix1 = mult_count_matirx1 + L;
 add_count_matrix = add_count_matrix + (L-1)*L;  % account for (L-1)*L in matrix-vector multiplication
-disp(['number of multiplications in matrix method is ' , mult_count_matrix])
-disp(['Number of additions in the matrix method' , add_count_matrix]);
-fprintf('Number of multiplications in matrix: %d\n', mult_count_matrix);
-fprintf('Number of additions in matrix: %d\n', add_count_matrix);
+disp(['number of multiplications in matrix method is  ' , num2str(mult_count_matirx1 )]);
+disp(['Number of additions in the matrix method ' , num2str(add_count_matrix)]);
+
 subplot(2,1,1);
 stem(y);
 title("circular convolution or linear convolution using matrix method")
